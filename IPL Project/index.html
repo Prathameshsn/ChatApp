@@ -1,0 +1,94 @@
+<!--Title     : IPL Web App.
+    Created By: Prathamesh Naik.
+    Day       : 26-08-2016.
+    Purpose   : Angularjs Practice.-->
+
+<html>
+<head>
+    <title>IPLT20.com</title>
+
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="http://code.angularjs.org/1.2.13/angular.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.8/angular-ui-router.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.3.0/firebase.js"></script>
+    <script src="https://cdn.firebase.com/libs/angularfire/2.0.2/angularfire.min.js"></script>
+    <link rel="stylesheet" href="style.css"></link>
+    <script src="app.js"></script>
+</head>
+
+
+<body ng-app="myApp" ng-controller="teamctrl">
+
+    <!--Header start-->
+    <nav class="navbar navbar-inverse">   
+          <div class="container">    
+              <div class="navbar-brand"><a ui-sref="home">
+                  <b><u><font color="white"> Indian Premier League</font></u></b></a>
+              </div>
+              <div class="Integrate-SDK">
+                  <button class="btn btn-success" ng-click="printdialog()">ChatApp</button>
+              </div>
+          </div>
+    </nav>
+    <!--Header end-->
+
+
+     <!--Model for popup chatwindow-->
+    <div id="myModal" class="modal">
+
+        <!--Chat Window-->
+         <div class="chatbox">
+            <div class="panel panel-default">
+                <!--header of chatwindow-->
+                <div class="panel-heading">
+                    <a href class="close" ng-click="close()">x</a> 
+                    <h4><b><span class="glyphicon glyphicon-comment"></span>&nbsp&nbspChat App</b></h4>
+                   
+                </div>
+                    
+                <!--body of chatwindow-->
+                <div class="content" ng-model="chatbox">
+                    <div class="col-sm-1">
+                    <button ng-repeat="x in msgdata">{{x.sendmsg}}<br></button>
+                    </div>
+                </div>
+                
+                <!--footer of chatwindow-->
+                <div class="panel-footer">
+                    <input id="btn-input" type="text" class="form-control input-sm" 
+                        ng-model="msgbox" placeholder="Type your message here..." />
+                    <span class="input-group-btn">
+                    <button class="btn btn-warning btn-sm" ng-click="printmsg()">Send</button>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <!--end of chat window-->
+    </div>
+
+<!--Page who display all team-->
+    <div>
+      <ui-view></ui-view>
+    </div>
+</body>
+
+ 	
+<script src="controller/teamCntrl.js"></script>
+<script src="controller/playerCntrl.js"></script>
+<script src="service/teamService.js"></script>
+
+
+<script>
+        // Initialize Firebase
+    var config = {
+        apiKey: "AIzaSyB4tZ_1Led9_0bgtpb3wZHFlfGdpmtOCtk",
+        authDomain: "ipl-project-66b8a.firebaseapp.com",
+        databaseURL: "https://ipl-project-66b8a.firebaseio.com",
+        storageBucket: "ipl-project-66b8a.appspot.com",
+    };
+    firebase.initializeApp(config);
+</script>
+
+</html>

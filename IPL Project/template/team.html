@@ -1,0 +1,40 @@
+
+<!--displaying team logo pic and team info-->
+<div class="col-sm-4"><br>
+        <center> <div ng-repeat="x in data1">
+        <center><img src="{{x.team_img_url}}" 
+                width="200" height="200" class="img-rounded"></img>
+        <h2><b><font color="purple"><center>{{portfolioId}}</center></font></b></h2> 
+        </div><br>
+
+        <h3><b><u>Team Information :</u></b></h3>
+        <table>
+            <tr ng-repeat="x in data1">
+              <td> 
+               <font color="black"> 
+              <b>Team Captain:&nbsp</b>{{x.team_captain}}<br><br>
+              <b>Team Coach:&nbsp</b>{{x.team_coach}}<br><br>
+              <b>Home Ground:&nbsp</b>{{x.team_home_venue}}<br><br>
+              <b>Team Owner:&nbsp</b>{{x.team_owner}}<br>
+               </font>
+              </td>
+            </tr> 
+        </table></center>
+</div>
+
+<!--Displaying team players name-->
+<div class="col-sm-3">
+        <h3><b><u>Team Players :</u></b></h3>
+        <table>
+            <tr ng-repeat="x in data">
+                <td>  
+                <li><a ui-sref=".player" ng-click="changeName(x.player_name)">
+                    <font color="black">{{x.player_name}}</font></li></a>
+                </td>
+            </tr>
+        </table>
+</div>
+
+<!--Page for displaing player info-->
+<div class="col-sm-4"><center><br><ui-view></ui-view></div>
+
