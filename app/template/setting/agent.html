@@ -11,8 +11,8 @@
         </tr>
         
         <tr>
-            <td>Prathamesh</td>
-            <td>prathameshsn94@gmail.com</td>
+            <td>{{admindata.AdminName}}</td>
+            <td>{{admindata.Email}}</td>
             <td>Account Admin</td>
             <td><a href><i class="glyphicon glyphicon-pencil" ng-click="edit()">Edit</a></td>
         </tr>                
@@ -48,9 +48,9 @@
         
         <hr>
         &nbspName:<br>
-        <input type="text" class="form-control" value={{admindata.AdminName}}><br>    
+        <input type="text" class="form-control" value={{admindata.AdminName}} ng-model="name"><br>    
         &nbspEmail:<br>
-        <input type="text" class="form-control" value={{admindata.Email}}><br> 
+        <input type="text" class="form-control" value={{admindata.Email}} ng-model="email"><br> 
         &nbspRole:<br>
         <select class="form-control" ng-disabled="true">
             <option>Admin</option>
@@ -59,7 +59,7 @@
         <hr>
 
         <div class="panel-footer">
-            <button class="btn btn-primary">Edit</button>
+            <button class="btn btn-primary" ng-click="editblock()">Edit</button>
             <button class="btn btn-primary" ng-click="closeedit()">Cancel</button>
         </div>
 

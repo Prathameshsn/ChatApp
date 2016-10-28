@@ -35,11 +35,21 @@ function demo($scope, $firebaseObject, loginServ, $stateParams, localStorageServ
     var admin = firebase.database().ref('Admin');
     admin.orderByChild('Status').equalTo('online').on("child_added", function (data) {
         $scope.admindata = data.val();
-        
+
         // pass username to servise
         loginServ.setName($scope.admindata.AdminName);
     })
-    
+
+
+    // Change status to offline after logout
+    $scope.signout = function () {
+        var fbref = firebase.database().ref('Admin');
+        fbref.orderByChild('AdminName').equalTo(loginServ.getName()).on("child_added", function (data) {
+            var key = data.key;
+            fbref.child(key).update({ 'AdminName': loginServ.getName(), 'Status': 'offline' })
+        })
+    }
+
 
     // get model of chatbox
     var model = document.getElementById('myModal');
@@ -59,21 +69,10 @@ function demo($scope, $firebaseObject, loginServ, $stateParams, localStorageServ
         localStorageService.set('obj', userAdminName)
     }
 
-    
+
     // Function for click on close button of chatbox
     $scope.close = function () {
         model.style.display = "none";
-    }
-
-
-    // Change status to offline after logout
-    $scope.signout = function () {
-       
-        var fbref = firebase.database().ref('Admin');
-        fbref.orderByChild('AdminName').equalTo(loginServ.getName()).on("child_added", function (data) {
-            var key = data.key;
-            fbref.child(key).update({ 'AdminName': loginServ.getName(), 'Status': 'offline' })
-        })
     }
 
 
@@ -90,12 +89,26 @@ function demo($scope, $firebaseObject, loginServ, $stateParams, localStorageServ
     }
 
 
-    // Edit agent block
+    // Get Agent Model
     var agent = document.getElementById('agent');
+
+    // Edit data from Edit window 
+    $scope.editblock = function () {
+        var fbref = firebase.database().ref('Admin');
+        fbref.orderByChild('AdminName').equalTo(loginServ.getName()).on("child_added", function (data) {
+            var key = data.key;
+
+            fbref.child(key).update({ 'AdminName': $scope.name, 'Email': $scope.email })
+            agent.style.display = "none";
+        })
+    }
+
+    // Display Edit Window
     $scope.edit = function () {
         agent.style.display = "block";
     }
-     $scope.closeedit = function () {
+    // Close Edit Window
+    $scope.closeedit = function () {
         agent.style.display = "none";
     }
 };

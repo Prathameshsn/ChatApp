@@ -10,12 +10,12 @@ function demo($scope, loginServ) {
         var length = 32;
         var chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-';
         var result = '';
-        
+
         for (var i = length; i > 0; --i)
             result += chars[Math.round(Math.random() * (chars.length - 1))];
         return result;
     }
-    
+
 
     // Function after new admin signup
     $scope.signup = function () {
@@ -35,8 +35,8 @@ function demo($scope, loginServ) {
 
         var username = [];
         fbref.orderByChild("AdminName").on('child_added', function (snapshot) {
-                var event = snapshot.AdminName.val();
-                alert(event)     
+            var event = snapshot.AdminName.val();
+            alert(event)
         })
 
         fbref.orderByChild('AdminName').equalTo($scope.username).on("child_added", function (data) {
